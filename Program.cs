@@ -1,7 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using BMG_db.Models;
+using BMG_db.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add services to the container.
+builder.Services.AddDbContext<BankDBContext>(options =>
+    options.UseMySql(builder.Configuration.GetConnectionString("BankDBConnection"), new MySqlServerVersion(new Version(8, 0, 21))));
+
+
 
 var app = builder.Build();
 
