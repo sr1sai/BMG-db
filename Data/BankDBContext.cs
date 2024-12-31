@@ -1,6 +1,5 @@
 ﻿using BMG_db.Models;
 using Microsoft.EntityFrameworkCore;
-
 namespace BMG_db.Data
 {
     public class BankDBContext : DbContext
@@ -22,20 +21,9 @@ namespace BMG_db.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySql("Server=localhost;Database=bmg;User=root;Password=30012003;", new MySqlServerVersion(new Version(8, 0, 21)));
+                optionsBuilder.UseMySql("Server=localhost;Database=bmg;User=root;Password=30012003;",
+                    new MySqlServerVersion(new Version(8, 0, 25)));
             }
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            // Specify precision and scale for the decimal property 'amount' on the 'Loan' entity
-            modelBuilder.Entity<Loan>()
-                .Property(l => l.amount)
-                .HasColumnType("decimal(18,2)");
-
-            // Additional configuration if needed
         }
     }
 }
